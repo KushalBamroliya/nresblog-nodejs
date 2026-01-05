@@ -1,0 +1,53 @@
+<div id="admin-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h1 class="admin-heading">
+          <i class="fa fa-file-text"></i> All Articles
+        </h1>
+      </div>
+      <div class="col-md-2 mb-2">
+        <a class="add-new" href="/admin/add-article">Add New Article</a>
+      </div>
+      <div class="col-md-12">
+        <table class="content-table" style="background: white">
+          <thead>
+            <th>S.No.</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Author</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            <% if (news && news.length > 0) { %> <% news.forEach((n,
+            index) => { %>
+            <tr>
+              <td class="id"><%= index + 1 %></td>
+              <td><%= n.newsTitle %></td>
+              <td><%= n.category.categoryName %></td>
+              <td><%= new Date(n.createdAt).toLocaleDateString("en-IN") %></td>
+              <td><%= n.author.fullname %></td>
+              <td class="edit">
+                <a href="/admin/update-article/<%= n._id %>">
+                  <i class="fa-regular fa-pen-to-square text-secondary-emphasis"></i>
+                </a>
+              </td>
+              <td class="delete">
+                <a href="/admin/delete-article/<%= n._id %>" onclick="return confirm('Are you sure you want to delete this article?')">
+                  <i class="fa-regular fa-trash-can text-secondary-emphasis"></i>
+                </a>
+              </td>
+            </tr>
+            <% }); %> <% } else { %>
+            <tr>
+              <td colspan="6" class="text-center">No users found</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

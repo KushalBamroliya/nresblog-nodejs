@@ -1,0 +1,69 @@
+<div id="admin-content">
+  <div class="container">
+    <div class="row">
+      <% if (query && query.error) { %>
+      <div class="alert alert-danger"><%= query.error %></div>
+      <% } %> <% if (query && query.success) { %>
+      <div class="alert alert-success"><%= query.success %></div>
+      <% } %>
+      <div class="col-md-10">
+        <h1 class="admin-heading">
+          <i class="fa fa-gears"></i> All Categories
+        </h1>
+      </div>
+      <div class="col-md-2">
+        <a class="add-new" href="/admin/add-category">add category</a>
+      </div>
+      <div class="col-md-12">
+        <table class="content-table text-center">
+          <thead>
+            <th>S.No.</th>
+            <th>Category Name</th>
+            <th>No. of Article</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            <% if (category && category.length > 0) { %> <%
+            category.forEach((cat, index) => { %>
+            <tr>
+              <td class="id"><%= index + 1 %></td>
+              <td><%= cat.categoryName %></td>
+
+              <td>5</td>
+              <td class="edit">
+                <a href="/admin/update-category/<%= cat._id %>">
+                  <i
+                    class="fa-regular fa-pen-to-square text-secondary-emphasis"
+                  ></i>
+                </a>
+              </td>
+              <td class="delete">
+                <a
+                  href="/admin/delete-category/<%= cat._id %>"
+                  onclick="return confirm('Are you sure you want to delete this user?')"
+                >
+                  <i
+                    class="fa-regular fa-trash-can text-secondary-emphasis"
+                  ></i>
+                </a>
+              </td>
+            </tr>
+            <% }); %> <% } else { %>
+            <tr>
+              <td colspan="6" class="text-center">No Category found</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (window.location.search) {
+    const url = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, document.title, url);
+  }
+</script>
